@@ -28,7 +28,7 @@ const projects = [
         status: 'Live',
         statusType: 'green',
         github: 'https://github.com/Pdinesh0103/Xplore',
-        live: 'https://Pdinesh0103.github.io/Xplore',
+        live: 'https://dineshp0103.github.io/Xplore',
         emoji: '🗺️',
     },
 ];
