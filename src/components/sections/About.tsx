@@ -33,7 +33,7 @@ export default function About() {
                     <div className={`${styles.imageWrap} reveal`}>
                         <div className={styles.imageFrame}>
                             <Image
-                                src="/images/hero2.jpg"
+                                src="https://obyqrspjrepujwuctezc.supabase.co/storage/v1/object/public/hero-images/hero2.jpg"
                                 alt="Dinesh about"
                                 fill
                                 style={{ objectFit: 'cover', objectPosition: 'top center' }}
