@@ -70,4 +70,21 @@
     .grid {
         grid-template-columns: 1fr;
     }
+
+    .card {
+        padding: 22px;
+        gap: 14px;
+    }
+
+    .name {
+        font-size: 1.3rem;
+    }
+
+    .desc {
+        font-size: 0.85rem;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
 }

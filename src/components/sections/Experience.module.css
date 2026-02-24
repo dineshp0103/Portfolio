@@ -101,10 +101,28 @@
 
 @media (max-width: 600px) {
     .item {
-        grid-template-columns: 70px 32px 1fr;
+        grid-template-columns: 60px 28px 1fr;
+        gap: 0 10px;
     }
 
     .year {
-        font-size: 0.7rem;
+        font-size: 0.68rem;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .cardTitle {
+        font-size: 0.95rem;
+    }
+
+    .cardDesc {
+        font-size: 0.82rem;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
     }
 }

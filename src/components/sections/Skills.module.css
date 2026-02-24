@@ -76,4 +76,17 @@
     .grid {
         grid-template-columns: 1fr;
     }
+
+    .card {
+        padding: 20px;
+    }
+
+    .pill {
+        padding: 5px 10px;
+        font-size: 0.73rem;
+    }
+
+    .catName {
+        font-size: 0.85rem;
+    }
 }

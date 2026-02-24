@@ -222,3 +222,44 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 480px) {
+    .formCard {
+        padding: 22px;
+    }
+
+    .socialsCard {
+        padding: 20px;
+    }
+
+    .socialLink {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .socialLabel {
+        font-size: 0.82rem;
+    }
+
+    .socialSub {
+        font-size: 0.68rem;
+    }
+
+    .cardTitle {
+        font-size: 1rem;
+        margin-bottom: 16px;
+    }
+
+    .statusRow {
+        font-size: 0.72rem;
+        gap: 8px;
+    }
+
+    .qrCard {
+        padding: 20px;
+    }
+
+    .qrWrap {
+        min-height: 150px;
+    }
+}

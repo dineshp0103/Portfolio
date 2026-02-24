@@ -131,4 +131,13 @@
     .hamburger {
         display: flex;
     }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .container {
+        height: 60px;
+        padding: 0 16px;
+    }
 }

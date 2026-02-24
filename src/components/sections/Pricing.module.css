@@ -120,3 +120,22 @@
         margin: 0 auto;
     }
 }
+
+@media (max-width: 480px) {
+    .card {
+        padding: 24px;
+        gap: 18px;
+    }
+
+    .priceVal {
+        font-size: 1.8rem;
+    }
+
+    .feature {
+        font-size: 0.82rem;
+    }
+
+    .note {
+        font-size: 0.78rem;
+    }
+}
