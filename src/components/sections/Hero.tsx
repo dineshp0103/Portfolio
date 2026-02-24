@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
+import { FiDownload } from 'react-icons/fi';
 import styles from './Hero.module.css';
 
 const roles = [
@@ -182,7 +183,10 @@ export default function Hero() {
 
                     <div className={styles.cta}>
                         <a href="#projects" className="btn-primary">View My Work</a>
-                        <a href="#contact" className="btn-outline">Hire Me</a>
+                        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline">
+                            <FiDownload size={15} /> Resume
+                        </a>
+                        <a href="#contact" className="btn-glass">Hire Me</a>
                     </div>
 
                     <div className={styles.stats}>
