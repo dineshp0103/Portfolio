@@ -11,7 +11,7 @@
 
 A modern, glassmorphism-styled developer portfolio built with **Next.js 14**, featuring animated hero sections, secure social links, JWT authentication, and email-integrated contact forms.
 
-[Live Demo](#) · [Report Bug](https://github.com/dineshp0103/Portfolio/issues) · [Request Feature](https://github.com/dineshp0103/Portfolio/issues)
+[🌐 Live Demo](https://portfolio-phi-six-30.vercel.app/) · [Report Bug](https://github.com/dineshp0103/Portfolio/issues) · [Request Feature](https://github.com/dineshp0103/Portfolio/issues)
 
 </div>
 
