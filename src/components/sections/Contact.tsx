@@ -18,6 +18,7 @@ export default function Contact() {
     const ref = useRef<HTMLDivElement>(null);
     const [form, setForm] = useState({ name: '', email: '', message: '' });
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [statusMsg, setStatusMsg] = useState<{ saved: boolean; emailSent: boolean; error?: string } | null>(null);
     const [qr, setQr] = useState<string | null>(null);
     const [qrLoading, setQrLoading] = useState(true);
 
@@ -41,20 +42,27 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('loading');
+        setStatusMsg(null);
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form),
             });
+            const data = await res.json();
             if (res.ok) {
                 setStatus('success');
+                setStatusMsg({ saved: data.saved ?? false, emailSent: data.emailSent ?? false });
                 setForm({ name: '', email: '', message: '' });
+                // Auto-reset after 8s
+                setTimeout(() => setStatus('idle'), 8000);
             } else {
                 setStatus('error');
+                setStatusMsg({ saved: false, emailSent: false, error: data.error || 'Something went wrong. Please try again.' });
             }
         } catch {
             setStatus('error');
+            setStatusMsg({ saved: false, emailSent: false, error: 'Network error. Check your connection and try again.' });
         }
     };
 
@@ -93,16 +101,38 @@ export default function Contact() {
                                     required className={styles.input} />
                             </div>
                             <button type="submit" className="btn-primary"
-                                disabled={status === 'loading'}
-                                style={{ width: '100%', justifyContent: 'center' }} id="submit-contact">
-                                <FiSend size={14} />
-                                {status === 'loading' ? 'Sending...' : 'Send Message'}
+                                disabled={status === 'loading' || status === 'success'}
+                                style={{ width: '100%', justifyContent: 'center', opacity: status === 'success' ? 0.6 : 1 }}
+                                id="submit-contact">
+                                {status === 'loading' ? (
+                                    <><span className={styles.spinner} />Sending…</>
+                                ) : status === 'success' ? (
+                                    <><span>✓</span> Sent!</>
+                                ) : (
+                                    <><FiSend size={14} /> Send Message</>
+                                )}
                             </button>
-                            {status === 'success' && (
-                                <p className={styles.success}>✓ Message sent! You'll hear from me soon.</p>
+
+                            {/* Status panel */}
+                            {status === 'success' && statusMsg && (
+                                <div className={styles.statusPanel}>
+                                    <div className={styles.statusRow}>
+                                        <span className={styles.statusDot} style={{ background: statusMsg.saved ? '#4ade80' : '#f87171' }} />
+                                        <span>{statusMsg.saved ? '✓ Message saved to inbox' : '⚠ Message not saved (DB)'}</span>
+                                    </div>
+                                    <div className={styles.statusRow}>
+                                        <span className={styles.statusDot} style={{ background: statusMsg.emailSent ? '#4ade80' : '#facc15' }} />
+                                        <span>{statusMsg.emailSent ? '✓ Email notification delivered' : '⚠ Email not sent (check Resend config)'}</span>
+                                    </div>
+                                </div>
                             )}
-                            {status === 'error' && (
-                                <p className={styles.error}>Something went wrong. Please try again.</p>
+                            {status === 'error' && statusMsg && (
+                                <div className={styles.statusPanel} style={{ borderColor: 'rgba(248,113,113,0.3)', background: 'rgba(248,113,113,0.06)' }}>
+                                    <div className={styles.statusRow}>
+                                        <span className={styles.statusDot} style={{ background: '#f87171' }} />
+                                        <span>{statusMsg.error}</span>
+                                    </div>
+                                </div>
                             )}
                         </form>
                     </div>
