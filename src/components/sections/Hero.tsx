@@ -193,7 +193,7 @@ export default function Hero() {
                         {[
                             { value: '2+', label: 'Projects' },
                             { value: 'LeetCode', label: 'DSA Active' },
-                            { value: '2027', label: 'Google Goal' },
+                            { value: '2029-30', label: 'SWE at Google' },
                         ].map(({ value, label }) => (
                             <div key={label} className={styles.stat}>
                                 <span className={styles.statVal}>{value}</span>

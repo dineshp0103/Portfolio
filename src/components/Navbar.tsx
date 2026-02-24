@@ -80,23 +80,21 @@ export default function Navbar() {
                 </div>
 
                 {/* Mobile menu */}
-                {mobileOpen && (
-                    <div className={styles.mobileMenu}>
-                        {navLinks.map(({ href, label }) => (
-                            <a
-                                key={href}
-                                href={href}
-                                className={styles.mobileLink}
-                                onClick={() => handleNavClick(href)}
-                            >
-                                {label}
-                            </a>
-                        ))}
-                        <div className={styles.mobileAuth}>
-                            <AuthButton />
-                        </div>
+                <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}>
+                    {navLinks.map(({ href, label }) => (
+                        <a
+                            key={href}
+                            href={href}
+                            className={styles.mobileLink}
+                            onClick={() => handleNavClick(href)}
+                        >
+                            {label}
+                        </a>
+                    ))}
+                    <div className={styles.mobileAuth}>
+                        <AuthButton />
                     </div>
-                )}
+                </div>
             </nav>
             {/* Spacer */}
             <div style={{ height: 72 }} />

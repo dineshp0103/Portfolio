@@ -11,7 +11,7 @@ export default function Footer() {
                     <span style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'var(--font-mono)' }}> /&gt;</span>
                 </div>
                 <p className={styles.copy}>
-                    © {new Date().getFullYear()} POLAMARASETTI DINESH · Built with Next.js & ❤️
+                    © {new Date().getFullYear()} POLAMARASETTI DINESH · Built with Next.js & Supabase
                 </p>
                 <div className={styles.socials}>
                     <a href="/api/social/github" target="_blank" rel="noopener noreferrer" className={styles.social} aria-label="GitHub">

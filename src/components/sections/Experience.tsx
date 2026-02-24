@@ -12,7 +12,7 @@ const timeline = [
         done: true,
     },
     {
-        year: '2024–25',
+        year: '2024-25',
         title: 'AI-Driven Full-Stack Development',
         desc: 'Building AI-driven full-stack websites using Vibe Coding with strong knowledge in debugging and modern web architecture. Mastered Spring Boot, REST APIs, React.js, MySQL, and production deployment.',
         emoji: '💻',
@@ -26,7 +26,7 @@ const timeline = [
         done: true,
     },
     {
-        year: '2025–26',
+        year: '2025-26',
         title: 'Project Vision (Active)',
         desc: 'Working on major AI infrastructure project. Deepening expertise in system design, scalable patterns, and DevOps.',
         emoji: '🔭',
@@ -34,18 +34,26 @@ const timeline = [
         active: true,
     },
     {
-        year: '2027',
-        title: 'Google SWE Internship',
-        desc: 'Target: Software Engineer Intern at Google. Focused on reaching Google-level DSA & system design proficiency.',
-        emoji: '🎯',
+        year: '2027-28',
+        title: 'Cracking GATE Exam',
+        desc: 'Target: Crack GATE 2027/28 with a top rank. Focused on mastering core CS subjects, aptitude, and problem-solving skills.',
+        emoji: '📝',
         done: false,
         goal: true,
     },
     {
-        year: '2028+',
-        title: 'Full-Stack + AI Engineer',
-        desc: 'Contribute to globally-used, scalable systems at top MNCs. Become a versatile Full-Stack & AI Engineer.',
-        emoji: '🌏',
+        year: '2028-29',
+        title: 'Step into Top IITs',
+        desc: 'Secure admission to a top IIT for M.Tech / research. Elevate expertise through world-class academics and cutting-edge projects.',
+        emoji: '🏛️',
+        done: false,
+        goal: true,
+    },
+    {
+        year: '2029-30',
+        title: 'Placed in Google',
+        desc: 'Final career goal: Get placed at Google as a Software Engineer. Combining IIT pedigree with hands-on full-stack & AI engineering experience.',
+        emoji: '🎯',
         done: false,
         goal: true,
     },
@@ -70,7 +78,7 @@ export default function Experience() {
                     <p className="section-tag reveal">// JOURNEY</p>
                     <h2 className="section-title reveal reveal-delay-1">Experience &amp; Goals</h2>
                     <p className="section-subtitle reveal reveal-delay-2" style={{ margin: '0 auto' }}>
-                        From first lines of code to Google-level engineering — a roadmap in progress.
+                        From first lines of code to GATE → IITs → Google — a roadmap in progress.
                     </p>
                 </div>
 

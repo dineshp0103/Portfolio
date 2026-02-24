@@ -163,21 +163,7 @@ export default function Contact() {
                             </div>
                         </div>
 
-                        {/* UPI QR */}
-                        <div className={`${styles.qrCard} glass-card reveal reveal-delay-2`}>
-                            <h3 className={styles.cardTitle}>Pay via UPI</h3>
-                            <p className={styles.qrNote}>Scan to pay for freelance services</p>
-                            <div className={styles.qrWrap}>
-                                {qrLoading ? (
-                                    <div className={styles.qrPlaceholder}>Generating QR...</div>
-                                ) : qr ? (
-                                    <Image src={qr} alt="UPI QR Code" width={180} height={180} style={{ borderRadius: 12 }} />
-                                ) : (
-                                    <div className={styles.qrPlaceholder}>QR not configured yet</div>
-                                )}
-                            </div>
-                            <p className={styles.qrSmall}>UPI ID is encrypted and stored securely server-side</p>
-                        </div>
+                        {/* UPI QR — hidden */}
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@ export default function About() {
                     <div className={`${styles.imageWrap} reveal`}>
                         <div className={styles.imageFrame}>
                             <Image
-                                src="https://obyqrspjrepujwuctezc.supabase.co/storage/v1/object/public/hero-images/hero2.jpg"
+                                src="https://obyqrspjrepujwuctezc.supabase.co/storage/v1/object/public/hero-images/hero3.jpg"
                                 alt="Dinesh about"
                                 fill
                                 style={{ objectFit: 'cover', objectPosition: 'top center' }}
@@ -47,7 +47,7 @@ export default function About() {
                             <div>
                                 <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>Career Goal</div>
                                 <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                                    SWE Intern @ Google, 2027
+                                    SWE @ Google by 2030
                                 </div>
                             </div>
                         </div>
