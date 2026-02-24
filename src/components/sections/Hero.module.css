@@ -1,0 +1,456 @@
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 24px;
+}
+
+.canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.gradientTop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.gradientBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: center;
+    padding: 80px 0;
+}
+
+.textCol {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.heading {
+    font-family: var(--font-main);
+    margin-bottom: 12px;
+}
+
+.greeting {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-secondary);
+    font-weight: 400;
+    display: block;
+}
+
+.name {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.75) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.roleRow {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rolePrefix {
+    color: var(--text-muted);
+}
+
+.roleName {
+    color: #fff;
+}
+
+.cursor {
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.tagline {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 550px;
+    line-height: 1.75;
+    margin-bottom: 32px;
+}
+
+.cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.stats {
+    display: flex;
+    gap: 32px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.statVal {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.statLabel {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+/* Image */
+.imageCol {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.imageFrame {
+    position: relative;
+    width: 380px;
+    height: 500px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* ── Carousel slide animations ─────────────────────────────────────────── */
+.heroImg {
+    opacity: 0;
+    pointer-events: none;
+    transition: none;
+}
+
+/* Static visible (no animation — stable resting state) */
+.heroImgVisible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+/* Enter from right (next direction) */
+.enterFromRight {
+    opacity: 1;
+    pointer-events: none;
+    animation: slideInRight var(--slide-ms, 600ms) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Enter from left (prev direction) */
+.enterFromLeft {
+    opacity: 1;
+    pointer-events: none;
+    animation: slideInLeft var(--slide-ms, 600ms) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Exit to left (next direction) */
+.exitToLeft {
+    opacity: 1;
+    pointer-events: none;
+    animation: slideOutLeft var(--slide-ms, 600ms) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Exit to right (prev direction) */
+.exitToRight {
+    opacity: 1;
+    pointer-events: none;
+    animation: slideOutRight var(--slide-ms, 600ms) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(105%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-105%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-105%);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(105%);
+    }
+}
+
+.imageOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 60%);
+    z-index: 1;
+}
+
+.dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+}
+
+.dotActive {
+    background: #fff;
+    width: 20px;
+    border-radius: 3px;
+}
+
+.floatingBadge {
+    position: absolute;
+    bottom: 30px;
+    left: -30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-family: var(--font-main);
+    z-index: 3;
+}
+
+/* ── Carousel arrow buttons ─────────────────────────────────────────────── */
+.arrowBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease, background 0.2s ease, transform 0.2s ease;
+    padding: 0;
+    padding-bottom: 2px;
+}
+
+.imageFrame:hover .arrowBtn {
+    opacity: 1;
+}
+
+.arrowBtn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.arrowLeft {
+    left: 12px;
+}
+
+.arrowRight {
+    right: 12px;
+}
+
+.arrowLeft:hover {
+    transform: translateY(-50%) scale(1.08);
+}
+
+.arrowRight:hover {
+    transform: translateY(-50%) scale(1.08);
+}
+
+/* ── Keyboard hint ──────────────────────────────────────────────────────── */
+.keyHint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 12px;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    opacity: 0.6;
+}
+
+.kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 7px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Scroll indicator */
+.scrollIndicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 3;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.1em;
+    animation: float 2s ease-in-out infinite;
+}
+
+.scrollMouse {
+    width: 22px;
+    height: 36px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 11px;
+    position: relative;
+}
+
+.scrollMouse::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    animation: scroll 2s ease-in-out infinite;
+}
+
+@keyframes scroll {
+
+    0%,
+    100% {
+        opacity: 1;
+        top: 6px;
+    }
+
+    50% {
+        opacity: 0;
+        top: 14px;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-6px);
+    }
+}
+
+@media (max-width: 900px) {
+    .content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 60px 0 100px;
+    }
+
+    .imageCol {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats {
+        gap: 20px;
+    }
+
+    .cta {
+        flex-direction: column;
+    }
+}

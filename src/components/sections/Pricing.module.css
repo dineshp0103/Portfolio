@@ -1,0 +1,122 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    position: relative;
+    border-radius: var(--radius);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.highlighted {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 80px rgba(255, 255, 255, 0.04);
+}
+
+.badge {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #000;
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-family: var(--font-main);
+    padding: 4px 14px;
+    border-radius: 50px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.planName {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.tagline {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.priceVal {
+    font-family: var(--font-main);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.priceSub {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    flex: 1;
+}
+
+.feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.87rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.check {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+}
+
+.note {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+        max-width: 460px;
+        margin: 0 auto;
+    }
+}

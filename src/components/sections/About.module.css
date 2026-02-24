@@ -1,0 +1,128 @@
+.grid {
+    display: grid;
+    grid-template-columns: 440px 1fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.imageWrap {
+    position: relative;
+}
+
+.imageFrame {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.imageOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent 60%);
+}
+
+.floatCard {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    font-family: var(--font-main);
+}
+
+.textSide {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 12px;
+}
+
+.bio {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.bio strong {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+.quoteCard {
+    padding: 22px 26px;
+    margin: 24px 0;
+    position: relative;
+}
+
+.quoteIcon {
+    font-size: 3rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.1);
+    font-family: Georgia, serif;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.quoteCard p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.7;
+    padding-left: 20px;
+}
+
+.goalsTitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 14px;
+    font-family: var(--font-main);
+}
+
+.goals {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.goal {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.goalIcon {
+    color: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-family: var(--font-mono);
+}
+
+@media (max-width: 960px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .imageFrame {
+        height: 360px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .floatCard {
+        right: 0;
+        bottom: -16px;
+    }
+}

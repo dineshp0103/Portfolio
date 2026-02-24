@@ -1,0 +1,110 @@
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 90px 40px 1fr;
+    gap: 0 16px;
+    align-items: stretch;
+}
+
+.left {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 18px;
+}
+
+.year {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+    margin-top: 20px;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.dotDone {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.dotActive {
+    background: #4ade80;
+    border-color: #4ade80;
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.4);
+}
+
+.dotGoal {
+    background: rgba(250, 204, 21, 0.3);
+    border-color: #facc15;
+}
+
+.line {
+    width: 1px;
+    flex: 1;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+    margin: 4px 0;
+}
+
+.card {
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.cardTop {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.emoji {
+    font-size: 1.4rem;
+}
+
+.cardTitle {
+    font-family: var(--font-main);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.cardDesc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+    .item {
+        grid-template-columns: 70px 32px 1fr;
+    }
+
+    .year {
+        font-size: 0.7rem;
+    }
+}
