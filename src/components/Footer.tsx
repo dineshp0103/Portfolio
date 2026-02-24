@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { FiGithub, FiLinkedin, FiMail, FiTwitter } from 'react-icons/fi';
 import styles from './Footer.module.css';
 
@@ -15,16 +14,16 @@ export default function Footer() {
                     © {new Date().getFullYear()} POLAMARASETTI DINESH · Built with Next.js & ❤️
                 </p>
                 <div className={styles.socials}>
-                    <a href="https://github.com/Pdinesh0103" target="_blank" rel="noopener noreferrer" className={styles.social} aria-label="GitHub">
+                    <a href="/api/social/github" target="_blank" rel="noopener noreferrer" className={styles.social} aria-label="GitHub">
                         <FiGithub size={18} />
                     </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.social} aria-label="LinkedIn">
+                    <a href="/api/social/linkedin" target="_blank" rel="noopener noreferrer" className={styles.social} aria-label="LinkedIn">
                         <FiLinkedin size={18} />
                     </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={styles.social} aria-label="Twitter">
+                    <a href="/api/social/twitter" target="_blank" rel="noopener noreferrer" className={styles.social} aria-label="Twitter">
                         <FiTwitter size={18} />
                     </a>
-                    <a href="mailto:pdinesh@email.com" className={styles.social} aria-label="Email">
+                    <a href="mailto:dineshpolamarasetti0103@gmail.com" className={styles.social} aria-label="Email">
                         <FiMail size={18} />
                     </a>
                 </div>
