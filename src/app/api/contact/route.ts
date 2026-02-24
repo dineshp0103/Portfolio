@@ -2,39 +2,48 @@ import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-    try {
-        const { name, email, message } = await req.json();
+  try {
+    const { name, email, message } = await req.json();
 
-        if (!name || !email || !message) {
-            return NextResponse.json({ error: 'All fields required' }, { status: 400 });
-        }
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: 'All fields required' }, { status: 400 });
+    }
 
-        // ── 1. Save to Supabase ─────────────────────────────────────────────────
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
-        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? '';
-        let saved = false;
+    // ── 1. Save to Supabase ─────────────────────────────────────────────────
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? '';
+    let saved = false;
+    let dbError = '';
 
-        if (supabaseUrl.startsWith('http') && supabaseKey.length > 10) {
-            const supabase = createClient(supabaseUrl, supabaseKey, {
-                auth: { autoRefreshToken: false, persistSession: false },
-            });
-            const { error } = await supabase
-                .from('contacts')
-                .insert([{ name, email, message }]);
-            if (!error) saved = true;
-        }
+    if (supabaseUrl.startsWith('http') && supabaseKey.length > 10) {
+      const supabase = createClient(supabaseUrl, supabaseKey, {
+        auth: { autoRefreshToken: false, persistSession: false },
+      });
+      const { error } = await supabase
+        .from('contacts')
+        .insert([{ name, email, message }]);
+      if (error) {
+        dbError = error.message;
+        console.error('[Contact API] Supabase insert error:', error.message, error.code);
+      } else {
+        saved = true;
+      }
+    } else {
+      console.warn('[Contact API] Supabase not configured — skipping DB save');
+    }
 
-        // ── 2. Send email notification via Resend ───────────────────────────────
-        const resendKey = process.env.RESEND_API_KEY ?? '';
-        const toEmail = process.env.CONTACT_EMAIL ?? '';
-        let emailSent = false;
+    // ── 2. Send email via Resend ────────────────────────────────────────────
+    const resendKey = process.env.RESEND_API_KEY ?? '';
+    const toEmail = process.env.CONTACT_EMAIL ?? '';
+    let emailSent = false;
+    let emailError = '';
 
-        if (resendKey && toEmail) {
-            const sentAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-            const html = `
+    if (resendKey && toEmail) {
+      const sentAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+      const html = `
         <div style="font-family:sans-serif;max-width:560px;margin:auto;background:#0a0a0a;color:#fff;border-radius:12px;overflow:hidden;">
           <div style="background:linear-gradient(135deg,#1a1a1a,#2a2a2a);padding:28px 32px;border-bottom:1px solid #333;">
-            <h2 style="margin:0;font-size:1.3rem;">📬 New Portfolio Contact</h2>
+            <h2 style="margin:0;font-size:1.3rem;">&#128236; New Portfolio Contact</h2>
             <p style="margin:6px 0 0;color:#aaa;font-size:0.85rem;">Received: ${sentAt} IST</p>
           </div>
           <div style="padding:28px 32px;">
@@ -52,21 +61,43 @@ export async function POST(req: NextRequest) {
           </div>
         </div>`;
 
-            const emailRes = await fetch('https://api.resend.com/emails', {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    from: 'Sky-Dev Portfolio <onboarding@resend.dev>',
-                    to: [toEmail],
-                    subject: `📬 Portfolio Contact from ${name}`,
-                    html,
-                }),
-            });
-            if (emailRes.ok) emailSent = true;
-        }
+      const emailRes = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${resendKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Sky-Dev Portfolio <onboarding@resend.dev>',
+          to: [toEmail],
+          subject: `Portfolio Contact from ${name}`,
+          html,
+        }),
+      });
 
-        return NextResponse.json({ success: true, saved, emailSent });
-    } catch {
-        return NextResponse.json({ error: 'Server error' }, { status: 500 });
+      const emailData = await emailRes.json();
+      if (emailRes.ok) {
+        emailSent = true;
+        console.log('[Contact API] Email sent, id:', emailData.id);
+      } else {
+        emailError = emailData.message ?? JSON.stringify(emailData);
+        console.error('[Contact API] Resend error:', emailRes.status, emailError);
+      }
+    } else {
+      console.warn('[Contact API] Resend not configured — skipping email');
     }
+
+    return NextResponse.json({
+      success: true,
+      saved,
+      emailSent,
+      // expose debug info only in dev
+      ...(process.env.NODE_ENV === 'development' && {
+        _debug: { dbError, emailError }
+      }),
+    });
+  } catch (err) {
+    console.error('[Contact API] Unexpected error:', err);
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+  }
 }
