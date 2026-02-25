@@ -27,7 +27,7 @@ const projects = [
         stack: ['Next.js', 'TypeScript', 'Python', 'Supabase', 'Gemini AI', 'React Flow'],
         status: 'Live',
         statusType: 'green',
-        github: 'https://github.com/Pdinesh0103/Xplore',
+        github: 'https://github.com/dineshp0103/Xplore',
         live: 'https://dineshp0103.github.io/Xplore',
         emoji: '🗺️',
     },
