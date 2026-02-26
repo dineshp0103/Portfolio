@@ -25,7 +25,7 @@ export async function GET(
     }
 
     try {
-        const url = Buffer.from(encoded, 'base64').toString('utf-8');
+        const url = encoded;
         // Server-side redirect — the actual URL never appears in client HTML
         return NextResponse.redirect(url, { status: 302 });
     } catch {
