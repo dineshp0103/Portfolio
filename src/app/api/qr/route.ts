@@ -8,8 +8,8 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: 'UPI not configured' }, { status: 500 });
         }
 
-        // Use the stored UPI ID directly
-        const upiId = encoded;
+        // Decode the base64-encoded UPI ID
+        const upiId = Buffer.from(encoded, 'base64').toString('utf-8');
 
         // Build UPI deep link
         const upiLink = `upi://pay?pa=${upiId}&pn=POLAMARASETTI+DINESH&cu=INR`;
