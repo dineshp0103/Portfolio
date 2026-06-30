@@ -4,7 +4,11 @@ node_modules/
 .next/
 out/
 dist/
+.git/
+.gitignore
 .DS_Store
 *.pem
 *.log
 .vercel
+Dockerfile
+README.md
