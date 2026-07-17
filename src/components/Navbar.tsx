@@ -42,15 +42,21 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-                <div className={styles.container}>
-                    {/* Logo */}
-                    <Link href="#home" className={styles.logo}>
-                        <span className={styles.logoText}>&lt;</span>
-                        <span className={styles.logoName}>Sky-Dev</span>
-                        <span className={styles.logoText} style={{ color: 'rgba(255,255,255,0.4)' }}> /&gt;</span>
-                    </Link>
+            {/* Top Bar for branding and authentication */}
+            <div className={styles.topBar}>
+                <Link href="#home" className={styles.logo}>
+                    <span className={styles.logoText}>&lt;</span>
+                    <span className={styles.logoName}>Sky-Dev</span>
+                    <span className={styles.logoText} style={{ color: 'rgba(255,255,255,0.4)' }}> /&gt;</span>
+                </Link>
+                <div className={styles.topAuth}>
+                    <AuthButton />
+                </div>
+            </div>
 
+            {/* Bottom floating navigation pill */}
+            <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${mobileOpen ? styles.navOpen : ''}`}>
+                <div className={styles.container}>
                     {/* Desktop links */}
                     <ul className={styles.links}>
                         {navLinks.map(({ href, label }) => (
@@ -66,20 +72,17 @@ export default function Navbar() {
                         ))}
                     </ul>
 
-                    {/* Auth + Hamburger */}
-                    <div className={styles.actions}>
-                        <AuthButton />
-                        <button
-                            className={styles.hamburger}
-                            onClick={() => setMobileOpen(!mobileOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            {mobileOpen ? <IoClose size={22} /> : <GiHamburgerMenu size={20} />}
-                        </button>
-                    </div>
+                    {/* Hamburger button (visible on mobile only) */}
+                    <button
+                        className={styles.hamburger}
+                        onClick={() => setMobileOpen(!mobileOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {mobileOpen ? <IoClose size={22} /> : <GiHamburgerMenu size={20} />}
+                    </button>
                 </div>
 
-                {/* Mobile menu */}
+                {/* Mobile menu expanding upward */}
                 <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}>
                     {navLinks.map(({ href, label }) => (
                         <a
@@ -91,13 +94,8 @@ export default function Navbar() {
                             {label}
                         </a>
                     ))}
-                    <div className={styles.mobileAuth}>
-                        <AuthButton />
-                    </div>
                 </div>
             </nav>
-            {/* Spacer */}
-            <div style={{ height: 72 }} />
         </>
     );
 }

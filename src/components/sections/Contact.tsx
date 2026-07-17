@@ -10,7 +10,7 @@ const SOCIALS = [
     { icon: <FiGithub size={18} />, label: 'GitHub', sub: 'dineshp0103', href: '/api/social/github' },
     { icon: <FiCloud size={18} />, label: 'Google Skills', sub: 'Cloud Skill Badges', href: '/api/social/gcloud' },
     { icon: <FiCode size={18} />, label: 'LeetCode', sub: 'dyk_dinesh', href: '/api/social/leetcode' },
-    { icon: <FiInstagram size={18} />, label: 'Instagram', sub: 'doyouknow.dinesh', href: '/api/social/instagram' },
+    { icon: <FiInstagram size={18} />, label: 'Instagram', sub: 'doyouknow_dinesh', href: '/api/social/instagram' },
     { icon: <FiTwitter size={18} />, label: 'X / Twitter', sub: 'idk__dinesh', href: '/api/social/twitter' },
 ];
 

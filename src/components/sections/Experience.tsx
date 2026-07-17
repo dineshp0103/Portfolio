@@ -27,9 +27,9 @@ const timeline = [
     },
     {
         year: '2025-26',
-        title: 'Project Vision (Active)',
-        desc: 'Working on major AI infrastructure project. Deepening expertise in system design, scalable patterns, and DevOps.',
-        emoji: '🔭',
+        title: 'GATE Preparation & AI Applications',
+        desc: 'Mastering core computer science subjects for GATE while actively studying and building AI-driven applications.',
+        emoji: '🧠',
         done: false,
         active: true,
     },
