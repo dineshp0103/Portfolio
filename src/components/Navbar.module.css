@@ -10,13 +10,13 @@
     align-items: center;
     padding: 0 40px;
     z-index: 1000;
-    pointer-events: none; /* Make overlay click-through */
+    pointer-events: none;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
     transition: all 0.3s ease;
 }
 
 .logo {
-    pointer-events: auto; /* Re-enable pointer events for logo link */
+    pointer-events: auto;
     font-family: var(--font-mono);
     font-size: 1.1rem;
     font-weight: 500;
@@ -40,7 +40,7 @@
 }
 
 .topAuth {
-    pointer-events: auto; /* Re-enable pointer events for auth button */
+    pointer-events: auto;
     display: flex;
     align-items: center;
 }
@@ -62,7 +62,7 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     overflow: hidden;
 }
 
@@ -82,6 +82,7 @@
     transition: all 0.3s ease;
 }
 
+/* Desktop Links */
 .links {
     display: flex;
     align-items: center;
@@ -110,52 +111,56 @@
     background: rgba(255, 255, 255, 0.12) !important;
 }
 
-.hamburger {
+/* ── Mobile Bubble Tab Bar ───────────────────────────────── */
+.mobileTabs {
     display: none;
-    background: transparent;
-    border: none;
-    color: #fff;
-    padding: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
+    list-style: none;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 4px;
+}
+
+.mobileTab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobileTabActive {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 8px 16px;
+}
+
+.mobileIcon {
+    display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
 }
 
-.hamburger:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
-
-/* ── Mobile Menu (Expanding Upward) ─────────────────────── */
-.mobileMenu {
-    display: none;
-    flex-direction: column;
-    padding: 0;
-    gap: 4px;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease,
-                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mobileLink {
+.mobileLabel {
     font-family: var(--font-main);
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 10px 16px;
-    border-radius: 10px;
-    transition: all 0.2s;
-    opacity: 0;
-    transform: translateY(8px);
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
+    animation: slideIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.mobileLink:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.06);
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* ── Responsive Styling ─────────────────────────────────── */
@@ -173,66 +178,26 @@
         display: none;
     }
 
-    .hamburger {
+    .mobileTabs {
         display: flex;
     }
 
-    /* Morph CLOSED navbar into a floating circle containing only the hamburger */
+    /* Persistent Pill layout for mobile navbar */
     .nav {
-        bottom: 24px;
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        width: 56px;
+        width: calc(100% - 24px);
+        max-width: 460px;
         height: 56px;
-        border-radius: 50%;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+        border-radius: 999px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 
                     inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 
     .container {
         width: 100%;
         height: 100%;
-        padding: 0;
-        justify-content: center;
+        padding: 0 6px;
     }
-
-    .mobileMenu {
-        display: flex;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    /* Morph OPENED navbar into a rounded menu container */
-    .nav.navOpen {
-        width: calc(100% - 32px);
-        max-width: 480px;
-        height: auto;
-        border-radius: 24px;
-        background: rgba(10, 10, 10, 0.85);
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 
-                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
-
-    .nav.navOpen .container {
-        height: 56px;
-    }
-
-    .nav.navOpen .mobileMenu {
-        max-height: 400px;
-        opacity: 1;
-        padding: 24px 20px 12px;
-    }
-
-    .mobileMenuOpen .mobileLink {
-        opacity: 1;
-        transform: translateY(0);
-        transition: all 0.25s ease, opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .mobileMenuOpen .mobileLink:nth-child(1) { transition-delay: 0.03s; }
-    .mobileMenuOpen .mobileLink:nth-child(2) { transition-delay: 0.06s; }
-    .mobileMenuOpen .mobileLink:nth-child(3) { transition-delay: 0.09s; }
-    .mobileMenuOpen .mobileLink:nth-child(4) { transition-delay: 0.12s; }
-    .mobileMenuOpen .mobileLink:nth-child(5) { transition-delay: 0.15s; }
-    .mobileMenuOpen .mobileLink:nth-child(6) { transition-delay: 0.18s; }
-    .mobileMenuOpen .mobileLink:nth-child(7) { transition-delay: 0.21s; }
 }

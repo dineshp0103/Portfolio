@@ -2,24 +2,22 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { IoClose } from 'react-icons/io5';
 import AuthButton from './AuthButton';
 import styles from './Navbar.module.css';
+import { FiHome, FiUser, FiCpu, FiFolder, FiTrendingUp, FiTag, FiMail } from 'react-icons/fi';
 
 const navLinks = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#pricing', label: 'Pricing' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#home', label: 'Home', icon: <FiHome size={20} /> },
+    { href: '#about', label: 'About', icon: <FiUser size={20} /> },
+    { href: '#skills', label: 'Skills', icon: <FiCpu size={20} /> },
+    { href: '#projects', label: 'Projects', icon: <FiFolder size={20} /> },
+    { href: '#experience', label: 'Experience', icon: <FiTrendingUp size={20} /> },
+    { href: '#pricing', label: 'Pricing', icon: <FiTag size={20} /> },
+    { href: '#contact', label: 'Contact', icon: <FiMail size={20} /> },
 ];
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
     const [active, setActive] = useState('home');
 
     useEffect(() => {
@@ -28,15 +26,7 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Close mobile menu on resize
-    useEffect(() => {
-        const handleResize = () => { if (window.innerWidth > 768) setMobileOpen(false); };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
     const handleNavClick = (href: string) => {
-        setMobileOpen(false);
         setActive(href.replace('#', ''));
     };
 
@@ -55,7 +45,7 @@ export default function Navbar() {
             </div>
 
             {/* Bottom floating navigation pill */}
-            <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${mobileOpen ? styles.navOpen : ''}`}>
+            <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
                 <div className={styles.container}>
                     {/* Desktop links */}
                     <ul className={styles.links}>
@@ -72,28 +62,24 @@ export default function Navbar() {
                         ))}
                     </ul>
 
-                    {/* Hamburger button (visible on mobile only) */}
-                    <button
-                        className={styles.hamburger}
-                        onClick={() => setMobileOpen(!mobileOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {mobileOpen ? <IoClose size={22} /> : <GiHamburgerMenu size={20} />}
-                    </button>
-                </div>
-
-                {/* Mobile menu expanding upward */}
-                <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}>
-                    {navLinks.map(({ href, label }) => (
-                        <a
-                            key={href}
-                            href={href}
-                            className={styles.mobileLink}
-                            onClick={() => handleNavClick(href)}
-                        >
-                            {label}
-                        </a>
-                    ))}
+                    {/* Mobile bubble tab bar */}
+                    <ul className={styles.mobileTabs}>
+                        {navLinks.map(({ href, label, icon }) => {
+                            const isActive = active === href.replace('#', '');
+                            return (
+                                <li key={href}>
+                                    <a
+                                        href={href}
+                                        className={`${styles.mobileTab} ${isActive ? styles.mobileTabActive : ''}`}
+                                        onClick={() => handleNavClick(href)}
+                                    >
+                                        <span className={styles.mobileIcon}>{icon}</span>
+                                        {isActive && <span className={styles.mobileLabel}>{label}</span>}
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </div>
             </nav>
         </>
